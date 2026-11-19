@@ -41,7 +41,7 @@ Three failure modes follow:
 
 ```
                  ┌─────────────┐
-                 │    OWNER    │  gives only the big picture:
+                 │    USER    │  gives only the big picture:
                  │   (human)   │  direction, values, final rulings
                  └──────┬──────┘
                         │ big picture only
@@ -60,15 +60,15 @@ Three failure modes follow:
                     ledger (audit)
 ```
 
-- **Owner** — the human. Speaks only in big picture: what to achieve, what matters, what is forbidden. Never relays, never pastes, never approves details.
-- **Conductor** — one AI the owner trusts as chief of staff. Receives the big picture, decomposes it into work, routes it, reviews results, and holds approval authority inside the frame the owner set.
+- **User** — the human. Speaks only in big picture: what to achieve, what matters, what is forbidden. Never relays, never pastes, never approves details.
+- **Conductor** — one AI the user trusts as chief of staff. Receives the big picture, decomposes it into work, routes it, reviews results, and holds approval authority inside the frame the user set.
 - **Residents** — local AI agents with real tools (files, commands, browsers) living in a shared "house" with an entrance discipline and standing rules.
 - **Guests** — cloud AIs. Talented, stateless, and *outside*: they receive work through a yard (in our build, a private GitHub repository: Issues in, Pull Requests out) and never hold keys to the house.
 
 ## Principles
 
-1. **The owner's stamina is the scarcest resource in the system.** Design every flow so the owner touches nothing but decisions only they can make. If a seam routes through the owner's hands, the design is wrong.
-2. **Approval lives where judgment lives.** An approval has meaning only when the approver can see the reasons. The conductor approves detail; the owner rules on direction and values. Everything approved is written to the ledger, so the owner can audit afterwards — audit replaces interruption.
+1. **The user's stamina is the scarcest resource in the system.** Design every flow so the user touches nothing but decisions only they can make. If a seam routes through the user's hands, the design is wrong.
+2. **Approval lives where judgment lives.** An approval has meaning only when the approver can see the reasons. The conductor approves detail; the user rules on direction and values. Everything approved is written to the ledger, so the user can audit afterwards — audit replaces interruption.
 3. **Guard the entrance and the record, not the function.** Residents keep their full toolsets. Control is exercised at entry points (pairing, signatures, keys) and through a complete record — never by crippling what an agent can do.
 4. **One pass, maximum progress.** Every instruction is written to finish in a single pass: inspect, implement, test, fix, complete. Slicing work into approval-seeking steps is a defect, not caution.
 5. **Mistakes are acceptable; unattended mistakes are not.** Agents are expected to act and occasionally err. A discovered error must be dealt with or reported — never left, never hidden.
@@ -79,8 +79,8 @@ Three failure modes follow:
 ## Documents
 
 - [ARCHITECTURE.md](ARCHITECTURE.md) — components: the ledger, the ticket lifecycle, the bell, the conductor's drop line, the guest yard.
-- [HOUSE-RULES.md](HOUSE-RULES.md) — the standing-instructions template every resident carries, and the owner's contract that sits above it.
+- [HOUSE-RULES.md](HOUSE-RULES.md) — the standing-instructions template every resident carries, and the user's contract that sits above it.
 
 ## Status
 
-This pattern is running in production in one household: the full loop — owner speaks once, conductor files, residents wake, work completes, reports return — has been verified end to end with no human relay. Names, paths, and people in this document are generalized; the mechanisms are described exactly as built.
+This pattern is running in production in one household: the full loop — user speaks once, conductor files, residents wake, work completes, reports return — has been verified end to end with no human relay. Names, paths, and people in this document are generalized; the mechanisms are described exactly as built.

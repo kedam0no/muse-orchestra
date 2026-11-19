@@ -8,7 +8,7 @@ An append-only, hash-chained event log is the single source of truth for all wor
 
 Rendered views (a work board, a "state of the house" page) are derived from the ledger for humans. The ledger itself is never edited — corrections are new events.
 
-**Why:** the owner's audit right depends on a record nobody can silently alter, and every agent coordinates through shared state instead of through the owner.
+**Why:** the user's audit right depends on a record nobody can silently alter, and every agent coordinates through shared state instead of through the user.
 
 ## 2. Tickets and their lifecycle
 
@@ -17,14 +17,14 @@ Work inside the house is a **ticket**: target resident, title, body (the full in
 ```
 draft ──confirm──▶ queued ──bell──▶ claimed ──▶ working ──▶ reported (done)
   │                  │                 │
-  └─dismiss          └─cancel          └─release / stall ──▶ owner's board
+  └─dismiss          └─cancel          └─release / stall ──▶ user's board
 ```
 
-- **Lease-based claiming.** A resident claims a ticket under a time lease. A stalled ticket surfaces on the owner's board as "waiting for your decision" with three exits: redeliver, reassign, cancel.
+- **Lease-based claiming.** A resident claims a ticket under a time lease. A stalled ticket surfaces on the user's board as "waiting for your decision" with three exits: redeliver, reassign, cancel.
 - **Confirmation is split by provenance** (the heart of the design):
-  - Tickets filed by a **resident** require the **owner's** confirmation. A resident must never be able to activate its own work.
-  - Tickets filed by the **conductor** are confirmed by the conductor, recorded as an auto-confirmation event carrying the owner's standing ruling. The owner delegated this once, in general, instead of approving ticket by ticket.
-- Every confirmation — by owner or conductor — is a ledger event with its provenance visible. Nothing activates silently.
+  - Tickets filed by a **resident** require the **user's** confirmation. A resident must never be able to activate its own work.
+  - Tickets filed by the **conductor** are confirmed by the conductor, recorded as an auto-confirmation event carrying the user's standing ruling. The user delegated this once, in general, instead of approving ticket by ticket.
+- Every confirmation — by user or conductor — is a ledger event with its provenance visible. Nothing activates silently.
 
 ## 3. The bell (wake system)
 
@@ -32,11 +32,11 @@ Residents are not always running. A patrol watcher ticks every few seconds; when
 
 Wake modes per resident: `command` (wake by script), `pull` (the resident polls), `none` (frozen).
 
-**Why:** residents cost nothing while asleep, startle awake in seconds, and the owner never has to "go and tell" anyone anything.
+**Why:** residents cost nothing while asleep, startle awake in seconds, and the user never has to "go and tell" anyone anything.
 
 ## 4. The conductor's drop line
 
-The conductor lives outside the house's network (in our build, in a cloud VM). It needs a mouth into the house that is not the owner.
+The conductor lives outside the house's network (in our build, in a cloud VM). It needs a mouth into the house that is not the user.
 
 The drop line is deliberately unglamorous:
 
@@ -66,8 +66,8 @@ Cloud AIs cannot be residents: they are stateless, they live behind other compan
 
 | Role | Lives | Keys | Work arrives via | Approves |
 |---|---|---|---|---|
-| Owner | — | all | — | direction, values, resident-filed drafts |
-| Conductor | cloud | drop-line signature, gateway scopes, yard | the owner's word | conductor-filed drafts, guest PRs, detail |
+| User | — | all | — | direction, values, resident-filed drafts |
+| Conductor | cloud | drop-line signature, gateway scopes, yard | the user's word | conductor-filed drafts, guest PRs, detail |
 | Resident | local | its room key | bell + tickets | nothing of its own |
 | Guest | cloud | none | yard Issues | nothing |
 
